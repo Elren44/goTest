@@ -8,7 +8,7 @@ import (
 
 func main() {
 	x := make(map[string][]string)
-	key := []string{}
+
 	folders, err := ioutil.ReadDir("../")
 	if err != nil {
 		log.Fatal(err)
@@ -18,11 +18,14 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
+		var values []string
 		for _, file := range files {
-			//x["golang"] = file.Name()
-			key = append(key, file.Name())
+			values = append(values, file.Name())
 		}
-		x[folder.Name()] = key
+		x[folder.Name()] = values
 	}
-	fmt.Println(x)
+	for v, a := range x {
+		fmt.Printf("Key: %s - value: %s\n", v, a)
+	}
+
 }
