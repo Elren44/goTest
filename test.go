@@ -29,24 +29,16 @@ func getHtml() string {
 
 func filePath(path string) {
 	path = strings.Replace(path, "\\", "/", -1)
-	if strings.HasSuffix(path, "/") {
-		file, err := os.Create(path + "hello.txt")
-		if err != nil {
-			fmt.Println("Unabe lo create: ", err)
-		}
-		defer file.Close()
-		file.WriteString(getHtml())
-		fmt.Println(file.Name())
-	} else {
+	if !strings.HasSuffix(path, "/") {
 		path = path + "/"
-		file, err := os.Create(path + "hello.txt")
-		if err != nil {
-			fmt.Println("Unabe lo create: ", err)
-		}
-		defer file.Close()
-		file.WriteString(getHtml())
-		fmt.Println(file.Name())
 	}
+	file, err := os.Create(path + "hello.txt")
+	if err != nil {
+		fmt.Println("Unabe lo create: ", err)
+	}
+	defer file.Close()
+	file.WriteString(getHtml())
+	fmt.Println(file.Name())
 }
 
 func main() {
