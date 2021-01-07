@@ -13,6 +13,10 @@ func getHtml() string {
 	var url string
 	fmt.Print("Введите адрес сайта: ")
 	fmt.Scan(&url)
+	if !strings.HasPrefix(url, "https://") {
+		fmt.Println("Введите адресс сайта полностью!")
+		getHtml()
+	}
 	resp, err := http.Get(url)
 	if err != nil {
 		log.Fatalln(err)
@@ -32,7 +36,7 @@ func filePath(path string) {
 	if !strings.HasSuffix(path, "/") {
 		path = path + "/"
 	}
-	file, err := os.Create(path + "hello.txt")
+	file, err := os.Create(path + "HTML.txt")
 	if err != nil {
 		fmt.Println("Unabe lo create: ", err)
 	}
