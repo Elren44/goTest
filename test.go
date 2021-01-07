@@ -14,8 +14,7 @@ func getHtml() string {
 	fmt.Print("Введите адрес сайта: ")
 	fmt.Scan(&url)
 	if !strings.HasPrefix(url, "https://") {
-		fmt.Println("Введите адресс сайта полностью!")
-		getHtml()
+		url = "https://" + url
 	}
 	resp, err := http.Get(url)
 	if err != nil {
